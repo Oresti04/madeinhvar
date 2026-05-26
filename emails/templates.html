@@ -1,0 +1,17 @@
+<!-- Simple HTML templates for demo email notifications -->
+<!-- Customer confirmation email -->
+<html>
+  <body style="font-family: Arial, sans-serif; background:#F7F3EF; color:#222; padding:20px;">
+    <h2 style="font-family: 'Playfair Display', serif;">Thank you for your order</h2>
+    <p>Hi {{name}},</p>
+    <p>Thanks for your purchase. Your order <strong>{{orderId}}</strong> has been received.</p>
+    <h3>Summary</h3>
+    <ul>
+      {{#items}}
+      <li>{{quantity}} x {{title}} — €{{price}}</li>
+      {{/items}}
+    </ul>
+    <p>Total: €{{total}}</p>
+    <p>We will contact you when your order ships.</p>
+  </body>
+</html>

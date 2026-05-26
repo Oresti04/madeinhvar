@@ -1,0 +1,14 @@
+{
+  "/api/email/route": "app/api/email/route.js",
+  "/api/stripe/checkout/route": "app/api/stripe/checkout/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/about/page": "app/about/page.js",
+  "/checkout/page": "app/checkout/page.js",
+  "/page": "app/page.js",
+  "/checkout/success/page": "app/checkout/success/page.js",
+  "/product/[slug]/page": "app/product/[slug]/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/shop/page": "app/shop/page.js",
+  "/cart/page": "app/cart/page.js"
+}
