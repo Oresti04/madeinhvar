@@ -20,12 +20,18 @@ export default config({
         category: fields.select({
           label: 'Category',
           options: [
+            { value: 'Bookmarks', label: 'Bookmarks' },
+            { value: 'Graphics', label: 'Graphics' },
+            { value: 'Digital prints', label: 'Digital prints' },
+            { value: 'Jewelry', label: 'Jewelry' },
             { value: 'Ceramics', label: 'Ceramics' },
-            { value: 'Textiles', label: 'Textiles' },
-            { value: 'Kitchen', label: 'Kitchen' },
-            { value: 'Home', label: 'Home' },
+            { value: 'Driftwood art', label: 'Driftwood art' },
+            { value: 'Bags', label: 'Bags' },
+            { value: 'Shavasana eyecovers', label: 'Shavasana eyecovers' },
+            { value: 'T-Shirts', label: 'T-Shirts (Coming Soon)' },
+            { value: 'Hoodies', label: 'Hoodies (Coming Soon)' },
           ],
-          defaultValue: 'Ceramics'
+          defaultValue: 'Bookmarks'
         }),
         featured: fields.checkbox({ label: 'Featured on homepage', defaultValue: false }),
         dimensions: fields.text({ label: 'Dimensions (optional)' }),
