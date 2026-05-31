@@ -1,19 +1,21 @@
 import { MetadataRoute } from 'next'
-import { products } from '../lib/mock/products'
+import { getAllProducts } from '../lib/products'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getAllProducts()
+
   return [
-    { url: `${baseUrl}/`, lastModified: new Date() },
-    { url: `${baseUrl}/about`, lastModified: new Date() },
-    { url: `${baseUrl}/shop`, lastModified: new Date() },
-    { url: `${baseUrl}/cart`, lastModified: new Date() },
-    { url: `${baseUrl}/checkout`, lastModified: new Date() },
-    { url: `${baseUrl}/contact`, lastModified: new Date() },
-    ...products.map((product) => ({
-      url: `${baseUrl}/product/${product.slug}`,
-      lastModified: new Date()
-    }))
+    { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+    { url: `${baseUrl}/shop`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+    ...products.map((p) => ({
+      url: `${baseUrl}/product/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
   ]
 }
