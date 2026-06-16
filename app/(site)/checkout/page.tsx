@@ -23,6 +23,18 @@ export default function CheckoutPage() {
   const [error, setError] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
 
+  const shippingOption = SHIPPING_OPTIONS.find((option) => option.id === shipping)!
+  const subtotal = items.reduce((s, item) => s + item.price * item.quantity, 0)
+  const total = subtotal + shippingOption.cost
+  const fullAddress = `${address}, ${city}, ${postalCode}, ${country}`
+
+  const itemSummary = useMemo(() => (
+    items.map((item) => ({
+      ...item,
+      totalPrice: item.price * item.quantity
+    }))
+  ), [items])
+
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -35,18 +47,6 @@ export default function CheckoutPage() {
       </section>
     )
   }
-
-  const shippingOption = SHIPPING_OPTIONS.find((option) => option.id === shipping)!
-  const subtotal = items.reduce((s, item) => s + item.price * item.quantity, 0)
-  const total = subtotal + shippingOption.cost
-  const fullAddress = `${address}, ${city}, ${postalCode}, ${country}`
-
-  const itemSummary = useMemo(() => (
-    items.map((item) => ({
-      ...item,
-      totalPrice: item.price * item.quantity
-    }))
-  ), [items])
 
   async function handleStripeCheckout(e: React.FormEvent) {
     e.preventDefault()
