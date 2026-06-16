@@ -1,0 +1,10 @@
+{
+  "title": "Fortress",
+  "description": "Handmade bookmark of the fortress",
+  "price": 900,
+  "category": "Bookmarks",
+  "featured": false,
+  "images": [
+    "/images/products/fortress-bookmark/images/0.jpg"
+  ]
+}
