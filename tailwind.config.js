@@ -10,8 +10,8 @@ module.exports = {
         muted: '#8D8A86'
       },
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif']
+        serif: ['var(--font-playfair)', 'Playfair Display', 'Georgia', 'serif'],
+        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif']
       }
     }
   },

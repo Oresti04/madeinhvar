@@ -70,7 +70,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                       src={item.images[0]}
                       alt={item.title}
                       fill
-                      className="object-cover transition duration-300 group-hover:scale-105"
+                      className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (

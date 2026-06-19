@@ -4,29 +4,61 @@
 
 :root {
   --color-terra: #C88A6A;
+  --color-terra-dark: #b17253;
   --color-terra-soft: rgba(200, 138, 106, 0.15);
   --color-beige: #F7F3EF;
   --color-cream: #FCF8F2;
   --color-black: #111111;
   --color-muted: #6F6A63;
   --radius: 1rem;
+  --font-sans: var(--font-inter), Inter, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
 }
 
+/* ── Keyframes ─────────────────────────────────── */
+
 @keyframes pop-scale {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.08); }
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Base ───────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  min-height: 100%;
 }
 
 body {
   background: var(--color-beige);
   color: var(--color-black);
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.65;
+}
+
+.font-serif, h1, h2, h3, h4 {
+  font-family: var(--font-serif);
 }
 
 a {
@@ -34,8 +66,17 @@ a {
   text-decoration: none;
 }
 
-button,
-a.btn {
+img {
+  display: block;
+}
+
+::selection {
+  background: rgba(200, 138, 106, 0.25);
+}
+
+/* ── Buttons ───────────────────────────────────── */
+
+button, a.btn {
   transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease, opacity 220ms ease;
 }
 
@@ -45,10 +86,11 @@ a.btn {
   justify-content: center;
   border-radius: 9999px;
   font-weight: 600;
-  padding: 0.85rem 1.4rem;
+  padding: 0.85rem 1.6rem;
   min-height: 3rem;
   border: 1px solid transparent;
   cursor: pointer;
+  letter-spacing: 0.01em;
 }
 
 .btn-primary {
@@ -58,26 +100,26 @@ a.btn {
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  transform: translateY(-1px);
-  background: #b17253;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+  background: var(--color-terra-dark);
+  opacity: 0.92;
 }
 
 .btn-secondary {
   background: #fff;
   color: var(--color-black);
-  border-color: rgba(0,0,0,0.08);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  background: var(--color-beige);
 }
 
 .btn-pop {
   animation: pop-scale 0.35s ease-out;
 }
+
+/* ── Navigation ────────────────────────────────── */
 
 .nav-link {
   position: relative;
@@ -94,9 +136,9 @@ a.btn {
   height: 2px;
   background: var(--color-terra);
   opacity: 0;
-  transform: scaleX(0.5);
+  transform: scaleX(0.4);
   transform-origin: left center;
-  transition: opacity 200ms ease, transform 200ms ease;
+  transition: opacity 200ms ease, transform 220ms ease;
 }
 
 .nav-link:hover::after,
@@ -105,25 +147,27 @@ a.btn {
   transform: scaleX(1);
 }
 
+/* ── Cards ─────────────────────────────────────── */
+
 .card {
   background: #fff;
-  border: 1px solid rgba(17,17,17,0.06);
+  border: 1px solid rgba(17, 17, 17, 0.06);
   border-radius: var(--radius);
-  box-shadow: 0 14px 34px rgba(17,17,17,0.06);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.03), 0 12px 32px rgba(17, 17, 17, 0.05);
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 48px rgba(17,17,17,0.09);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(17, 17, 17, 0.04), 0 22px 48px rgba(17, 17, 17, 0.09);
   border-color: var(--color-terra-soft);
 }
 
 .card.no-hover-card:hover,
 .checkout-page .card:hover {
   transform: none !important;
-  box-shadow: 0 14px 34px rgba(17,17,17,0.06);
-  border-color: rgba(17,17,17,0.06);
+  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.03), 0 12px 32px rgba(17, 17, 17, 0.05);
+  border-color: rgba(17, 17, 17, 0.06);
 }
 
 .checkout-page .btn-primary:hover,
@@ -134,33 +178,78 @@ a.btn {
   box-shadow: none !important;
 }
 
+
+/* ── Fields ─────────────────────────────────────── */
+
 .field {
   width: 100%;
-  border: 1px solid rgba(17,17,17,0.12);
+  border: 1px solid rgba(17, 17, 17, 0.12);
   border-radius: 0.85rem;
   background: #fff;
   padding: 0.85rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .field:focus {
   outline: none;
   border-color: var(--color-terra);
-  box-shadow: 0 0 0 3px rgba(200,138,106,0.16);
+  box-shadow: 0 0 0 3px rgba(200, 138, 106, 0.16);
 }
+
+.field::placeholder {
+  color: var(--color-muted);
+  opacity: 0.65;
+}
+
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236F6A63'%3E%3Cpath fill-rule='evenodd' d='M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.1rem;
+  padding-right: 2.5rem;
+}
+
+/* ── Utilities ──────────────────────────────────── */
 
 .text-muted {
   color: var(--color-muted);
 }
 
 .animate-fade-up {
-  animation: fade-up 350ms ease forwards;
+  animation: fade-up 480ms ease forwards;
 }
 
-html, body, #__next {
-  min-height: 100%;
+.animate-fade-in {
+  animation: fade-in 400ms ease forwards;
 }
+
+.animate-slide-down {
+  animation: slide-down 280ms ease forwards;
+}
+
+
+/* Scroll-driven reveal — modern browsers only, degrades gracefully */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+}
+
+/* ── Focus ──────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-terra);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Container ──────────────────────────────────── */
 
 .container {
-  @apply max-w-6xl mx-auto px-4;
+  @apply max-w-6xl mx-auto px-4 sm:px-6;
 }

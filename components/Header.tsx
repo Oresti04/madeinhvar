@@ -30,15 +30,25 @@ export default function Header() {
           <Link href="/shop" className="nav-link">Shop</Link>
           <Link href="/about" className="nav-link">About</Link>
           <Link href="/contact" className="nav-link">Contact</Link>
-          <Link href="/cart" className="nav-link ml-4">
-            Cart {hasMounted && count > 0 ? `(${count})` : ''}
+          <Link href="/cart" className="nav-link ml-4 relative" aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            {hasMounted && count > 0 && (
+              <span className="absolute -top-2 -right-2 bg-terracotta text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">{count}</span>
+            )}
           </Link>
         </nav>
 
         {/* Mobile controls */}
         <div className="flex items-center gap-4 md:hidden">
-          <Link href="/cart" className="text-sm font-medium">
-            Cart {hasMounted && count > 0 ? `(${count})` : ''}
+          <Link href="/cart" className="relative" aria-label="Cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            {hasMounted && count > 0 && (
+              <span className="absolute -top-2 -right-2 bg-terracotta text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">{count}</span>
+            )}
           </Link>
           <button
             onClick={() => setMenuOpen((o) => !o)}

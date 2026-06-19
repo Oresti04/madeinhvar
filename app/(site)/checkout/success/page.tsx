@@ -5,73 +5,71 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import useCart from '@/store/useCart'
 
-type StripeSession = {
-  id: string
-  paymentStatus: string
-  amountTotal: number
-  currency: string
-  customerEmail?: string | null
-  customerName?: string | null
-  customerAddress?: string | null
-  notes?: string | null
-  shipping?: string | null
-  lineItems: Array<{ name: string; quantity: number; amountSubtotal: number }>
+type OrderSummary = {
+  orderId: string
+  name: string
+  email: string
+  phone: string
+  address: string
+  shipping: string
+  notes: string
+  total: number
+  items: Array<{ name: string; quantity: number; amountSubtotal: number }>
+}
+
+const SHIPPING_LABELS: Record<string, string> = {
+  croatia: 'Croatia',
+  eu: 'European Union',
+  world: 'Worldwide',
 }
 
 function SuccessContent() {
-  const [session, setSession] = useState<StripeSession | null>(null)
+  const [order, setOrder] = useState<OrderSummary | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
   const searchParams = useSearchParams()
   const { clear } = useCart()
 
   useEffect(() => {
-    const sessionId = searchParams?.get('session_id')
-    if (!sessionId) {
-      setError('No session found. Please return to your cart and try again.')
+    const encoded = searchParams?.get('order')
+    if (!encoded) {
+      setError('No order information found. Please check your email for confirmation.')
       return
     }
 
-    const fetchSession = async () => {
-      setIsLoading(true)
-      const response = await fetch(`/api/stripe/session?session_id=${encodeURIComponent(sessionId)}`)
-      const data = await response.json()
-      setIsLoading(false)
-
-      if (!response.ok) {
-        setError(data.error || 'Could not verify your order.')
-        return
-      }
-
-      setSession(data)
-      if (data.paymentStatus === 'paid') clear()
+    try {
+      const decoded = JSON.parse(atob(encoded.replace(/-/g, '+').replace(/_/g, '/')))
+      setOrder(decoded)
+      clear()
+    } catch {
+      setError('Could not load order details. Please check your email for confirmation.')
     }
-
-    fetchSession()
   }, [searchParams])
 
-  if (isLoading) return <p className="text-muted">Verifying your order…</p>
   if (error) return <div className="text-red-600">{error}</div>
-  if (!session) return null
+  if (!order) return null
 
   return (
     <div className="space-y-4">
       <div className="card p-6">
-        <div className="font-semibold mb-2">Payment: {session.paymentStatus}</div>
-        <div className="text-muted text-sm">Order ID: {session.id}</div>
-        {session.customerName && <div className="mt-1">Name: {session.customerName}</div>}
-        <div className="mt-1">Email: {session.customerEmail}</div>
-        {session.shipping && <div className="mt-1">Shipping: {session.shipping}</div>}
-        {session.customerAddress && <div className="mt-1">Address: {session.customerAddress}</div>}
-        <div className="mt-3 font-semibold">
-          Total: €{(session.amountTotal / 100).toFixed(2)} {session.currency?.toUpperCase()}
+        <div className="font-semibold text-green-700 mb-2">Payment successful</div>
+        <div className="text-muted text-sm mb-3">Order reference: {order.orderId}</div>
+        <div className="space-y-1 text-sm">
+          {order.name && <div><span className="text-muted">Name:</span> {order.name}</div>}
+          <div><span className="text-muted">Email:</span> {order.email}</div>
+          {order.phone && <div><span className="text-muted">Phone:</span> {order.phone}</div>}
+          {order.shipping && <div><span className="text-muted">Shipping:</span> {SHIPPING_LABELS[order.shipping] ?? order.shipping}</div>}
+          {order.address && <div><span className="text-muted">Address:</span> {order.address}</div>}
+          {order.notes && <div><span className="text-muted">Note:</span> {order.notes}</div>}
+        </div>
+        <div className="mt-4 pt-4 border-t font-semibold">
+          Total: €{(order.total / 100).toFixed(2)}
         </div>
       </div>
 
       <div className="card p-6">
         <div className="font-medium mb-3">Items ordered</div>
-        <ul className="list-disc ml-5 space-y-1 text-muted">
-          {session.lineItems.map((item) => (
+        <ul className="list-disc ml-5 space-y-1 text-muted text-sm">
+          {order.items.map((item) => (
             <li key={`${item.name}-${item.quantity}`}>
               {item.name} × {item.quantity} — €{(item.amountSubtotal / 100).toFixed(2)}
             </li>

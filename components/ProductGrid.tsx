@@ -17,7 +17,7 @@ export default function ProductGrid({ items }: { items: Product[] }) {
                 src={p.images[0]}
                 alt={p.title}
                 fill
-                className="object-cover transition duration-300 group-hover:scale-105"
+                className="object-cover"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
               />
             ) : (
