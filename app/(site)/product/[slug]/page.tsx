@@ -47,14 +47,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p className="mt-6 text-xl">€{(product.price / 100).toFixed(2)}</p>
           <AddToCartButton product={product} />
 
-          <section className="mt-8">
-            <h3 className="font-serif">Details</h3>
-            <ul className="text-muted mt-2 space-y-1">
-              {product.materials && <li>Materials: {product.materials}</li>}
-              {product.dimensions && <li>Dimensions: {product.dimensions}</li>}
-              {product.shippingInfo && <li>{product.shippingInfo}</li>}
-            </ul>
-          </section>
+          {product.details && (
+            <section className="mt-8">
+              <h3 className="font-serif">Details</h3>
+              <p className="text-muted mt-2 whitespace-pre-line">{product.details}</p>
+            </section>
+          )}
         </div>
       </div>
 

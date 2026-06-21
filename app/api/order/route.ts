@@ -316,6 +316,9 @@ export async function POST(request: Request) {
     if ((email as string).length > 100) {
       return NextResponse.json({ error: 'Email too long' }, { status: 400 })
     }
+    if (!/^\+\d{1,4} \d{4,20}$/.test((phone as string).trim())) {
+      return NextResponse.json({ error: 'Invalid phone number format' }, { status: 400 })
+    }
     if ((phone as string).length > 30) {
       return NextResponse.json({ error: 'Phone number too long' }, { status: 400 })
     }
@@ -328,8 +331,8 @@ export async function POST(request: Request) {
     if ((city as string).trim().length < 2 || (city as string).length > 50) {
       return NextResponse.json({ error: 'Please enter a valid city (2–50 characters)' }, { status: 400 })
     }
-    if ((postalCode as string).trim().length < 2 || (postalCode as string).length > 12) {
-      return NextResponse.json({ error: 'Please enter a valid postal code' }, { status: 400 })
+    if (!/^\d{2,12}$/.test((postalCode as string).trim())) {
+      return NextResponse.json({ error: 'Please enter a valid postal code (digits only)' }, { status: 400 })
     }
     if ((country as string).length > 100) {
       return NextResponse.json({ error: 'Invalid country' }, { status: 400 })

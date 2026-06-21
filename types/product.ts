@@ -7,7 +7,5 @@ export type Product = {
   images: string[]
   category: string
   featured?: boolean
-  dimensions?: string
-  materials?: string
-  shippingInfo?: string
+  details?: string
 }

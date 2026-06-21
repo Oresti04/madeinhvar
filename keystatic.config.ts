@@ -34,9 +34,7 @@ export default config({
           defaultValue: 'Bookmarks'
         }),
         featured: fields.checkbox({ label: 'Featured on homepage', defaultValue: false }),
-        dimensions: fields.text({ label: 'Dimensions (optional)' }),
-        materials: fields.text({ label: 'Materials (optional)' }),
-        shippingInfo: fields.text({ label: 'Shipping info (optional)' }),
+        details: fields.text({ label: 'Details (optional)', multiline: true }),
         images: fields.array(
           fields.image({
             label: 'Image',

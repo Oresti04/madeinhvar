@@ -30,9 +30,7 @@ async function entryToProduct(slug: string): Promise<Product | null> {
     images: resolveImages(entry.images),
     category: entry.category ?? '',
     featured: entry.featured ?? false,
-    dimensions: entry.dimensions ?? undefined,
-    materials: entry.materials ?? undefined,
-    shippingInfo: entry.shippingInfo ?? undefined,
+    details: entry.details ?? undefined,
   }
 }
 

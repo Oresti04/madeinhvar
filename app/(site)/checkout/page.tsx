@@ -383,11 +383,11 @@ export default function CheckoutPage() {
                 />
                 {/* Phone with prefix */}
                 <div className="flex overflow-hidden border border-black/[0.12] rounded-[0.85rem] bg-white transition-[border-color,box-shadow] duration-200 focus-within:border-terracotta focus-within:shadow-[0_0_0_3px_rgba(200,138,106,0.16)]">
-                  <div className="relative flex items-center shrink-0 border-r border-black/[0.12]">
+                  <div className="relative flex items-center shrink-0 border-r border-black/[0.12] w-[6.5rem] overflow-hidden">
                     <select
                       value={phonePrefix}
                       onChange={e => setPhonePrefix(e.target.value)}
-                      className="appearance-none bg-transparent pl-3 pr-7 py-[0.85rem] text-sm focus:outline-none cursor-pointer"
+                      className="appearance-none bg-transparent pl-3 pr-7 py-[0.85rem] text-sm focus:outline-none cursor-pointer w-full"
                       autoComplete="tel-country-code"
                       aria-label="Phone country code"
                     >
@@ -401,15 +401,15 @@ export default function CheckoutPage() {
                     placeholder="Phone number"
                     type="tel"
                     value={phone}
-                    onChange={e => setPhone(e.target.value)}
+                    onChange={e => setPhone(e.target.value.replace(/\D/g, ''))}
                     className="flex-1 bg-transparent px-3 py-[0.85rem] text-[0.9375rem] focus:outline-none min-w-0"
                     required
                     minLength={4}
                     maxLength={20}
                     autoComplete="tel-national"
-                    inputMode="tel"
-                    pattern="[\d\s\-\(\)]{4,}"
-                    title="Enter a valid phone number (digits, spaces, hyphens or parentheses)"
+                    inputMode="numeric"
+                    pattern="\d{4,}"
+                    title="Enter a valid phone number (digits only)"
                   />
                 </div>
               </div>
@@ -444,14 +444,15 @@ export default function CheckoutPage() {
                   <input
                     placeholder="Postal code"
                     value={postalCode}
-                    onChange={e => setPostalCode(e.target.value)}
+                    onChange={e => setPostalCode(e.target.value.replace(/\D/g, ''))}
                     className="field"
                     required
                     minLength={2}
                     maxLength={12}
                     autoComplete="postal-code"
-                    pattern="[A-Za-z0-9 \-]{2,}"
-                    title="Enter a valid postal code"
+                    inputMode="numeric"
+                    pattern="\d{2,}"
+                    title="Enter a valid postal code (digits only)"
                   />
                 </div>
                 {/* Country dropdown */}

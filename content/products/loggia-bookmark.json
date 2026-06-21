@@ -1,10 +1,11 @@
 {
   "title": "Loggia Bookmark",
-  "description": "Handmade bookmark of Loggia Hvar",
+  "description": "By Ivo Boras",
   "price": 900,
   "category": "Bookmarks",
   "featured": false,
+  "details": "Bookmark B&W\nMotive: Loggia\n",
   "images": [
-    "/images/products/loggia-bookmark/images/0.jpg"
+    "/images/products/loggia-bookmark/images/0.jpeg"
   ]
 }

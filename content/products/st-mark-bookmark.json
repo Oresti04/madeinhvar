@@ -1,0 +1,11 @@
+{
+  "title": "St. Mark Bookmark",
+  "description": "by Ivo Boras",
+  "price": 900,
+  "category": "Bookmarks",
+  "featured": true,
+  "details": "Bookmark B&W\nMotive : St. Mark\n\n",
+  "images": [
+    "/images/products/st-mark-bookmark/images/0.jpeg"
+  ]
+}

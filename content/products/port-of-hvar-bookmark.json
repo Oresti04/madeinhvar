@@ -1,10 +1,11 @@
 {
-  "title": "Port of Hvar ",
-  "description": "Handmade bookmark of port of Hvar",
+  "title": "Port of Hvar Bookmark",
+  "description": "By Ivo Boras",
   "price": 900,
   "category": "Bookmarks",
   "featured": true,
+  "details": "Bookmark B&W\nMotive : Port of Hvar\n\n",
   "images": [
-    "/images/products/port-of-hvar-bookmark/images/0.jpg"
+    "/images/products/port-of-hvar-bookmark/images/0.jpeg"
   ]
 }
